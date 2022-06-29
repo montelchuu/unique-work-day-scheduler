@@ -1,12 +1,12 @@
 # Work-Day-Scheduler
 
-my github
+https://montelchuu.github.io/unique-work-day-scheduler/
 
 ### Summary
 * Work day scheduler for hourly events
 * With the use of local storage, the events will stay even with a page refresh
 
-!!{}(assets/images/workday-full.jpg)
+![](assets/images/workday-full.jpg)
 
 ### The project layout
 * The user can input their event for the hour in the blanks
