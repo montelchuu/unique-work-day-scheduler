@@ -1,7 +1,9 @@
 //current day, month, year.
-$("#currentDay").text(moment().format('MMMM Do YYYY'));
+//Added hour and minutes
+$("#currentDay").text(moment().format('llll'));
 
 $(document).ready(function () {
+    // button click listener for save button
     $(".saveBtn").on("click", function() {
         var text = $(this).siblings(".activity").val();
         var time = $(this).siblings(".hour").text();
@@ -9,31 +11,34 @@ $(document).ready(function () {
         localStorage.setItem(time, text);
     })
 
-    function timeColorBlocks() {
+    $(".time-block").each(function () {
+        // Color coded time block function
         var timeNow = moment().hour();
+        var currentHour = parseInt($(this).attr("id").split("hour")[1]);
 
-        $(".time-block").each(function () {
-            var currentHour = parseInt($(this).attr("id").split("hour")[1]);
+        // console.log(this);
+        // console.log(timeNow);
+        // console.log(currentHour);
 
-            console.log(this);
-            console.log(timeNow);
-            console.log(currentHour);
+        if (currentHour > timeNow) {
+            $(this).addClass("future");
+        } else if (currentHour === timeNow) {
+            $(this).addClass("present");
+        } else {
+            $(this).addClass("past");
+        }
+    })
 
-            if (currentHour > timeNow) {
-                $(this).removeClass("present");
-                $(this).removeClass("past");
-                $(this).addClass("future");
-            } else if (currentHour === timeNow) {
-                $(this).removeClass("past");
-                $(this).removeClass("future");
-                $(this).addClass("present");
-            } else {
-                
-                $(this).removeClass("future");
-                $(this).removeClass("present");
-                $(this).addClass("past");
-            }
-        })
-    }
-    timeColorBlocks();
+    // Time block event persists though page refresh
+    $("#hour8 .activity").val(localStorage.getItem("8AM"));
+    $("#hour9 .activity").val(localStorage.getItem("9AM"));
+    $("#hour10 .activity").val(localStorage.getItem("10AM"));
+    $("#hour11 .activity").val(localStorage.getItem("11AM"));
+    $("#hour12 .activity").val(localStorage.getItem("12PM"));
+    $("#hour13 .activity").val(localStorage.getItem("1PM"));
+    $("#hour14 .activity").val(localStorage.getItem("2PM"));
+    $("#hour15 .activity").val(localStorage.getItem("3PM"));
+    $("#hour16 .activity").val(localStorage.getItem("4PM"));
+    $("#hour17 .activity").val(localStorage.getItem("5PM"));
 })
+
